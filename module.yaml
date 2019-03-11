@@ -1,0 +1,18 @@
+notests *default:
+  build:
+    target: Vostok.Configuration.Microsoft.sln
+    configuration: NoTests
+    tool:
+      name: dotnet
+
+  install:
+    - Vostok.Configuration.Microsoft/bin/Release/netstandard2.0/Vostok.Configuration.Microsoft.dll
+
+  deps:
+    - vostok.configuration.abstractions
+    - vostok.devtools
+
+full-build > notests:
+  build:
+    target: Vostok.Configuration.Microsoft.sln
+    configuration: Release
