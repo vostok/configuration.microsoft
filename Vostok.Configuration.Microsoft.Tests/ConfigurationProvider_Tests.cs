@@ -24,7 +24,7 @@ namespace Vostok.Configuration.Microsoft.Tests
             vostokConfigurationSource = Substitute.For<IConfigurationSource>();
             subscriptionObservable = Substitute.For<IObservable<(ISettingsNode settings, Exception error)>>();
             vostokConfigurationSource.Observe().Returns(subscriptionObservable);
-            
+
             subscriptionObservable
                 .Subscribe(Arg.Any<IObserver<(ISettingsNode settings, Exception error)>>())
                 .Returns(
@@ -36,10 +36,10 @@ namespace Vostok.Configuration.Microsoft.Tests
 
                         return Substitute.For<IDisposable>();
                     });
-            
+
             configurationProvider = new VostokConfigurationProvider(vostokConfigurationSource);
-            
-            configuration = new ConfigurationRoot(new List<IConfigurationProvider>() { configurationProvider });
+
+            configuration = new ConfigurationRoot(new List<IConfigurationProvider> {configurationProvider});
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace Vostok.Configuration.Microsoft.Tests
         {
             SetSettings(new ValueNode("name", "value"));
             configuration["name"].Should().Be("value");
-            
+
             SetSettings(new ValueNode("name", "new value"));
             configuration["name"].Should().Be("new value");
         }
@@ -70,7 +70,7 @@ namespace Vostok.Configuration.Microsoft.Tests
         {
             Assert.DoesNotThrow(() => SetException(new Exception()));
         }
-        
+
         private void SetSettings(ISettingsNode settingsNode)
         {
             updateSettingsDelegate((settingsNode, null));

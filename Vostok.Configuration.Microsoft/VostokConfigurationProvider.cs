@@ -11,7 +11,7 @@ namespace Vostok.Configuration.Microsoft
         {
             vostokConfigurationSource.Observe().Subscribe(this);
         }
-        
+
         public void OnCompleted()
         {
         }
@@ -27,7 +27,7 @@ namespace Vostok.Configuration.Microsoft
                 OnError(value.Item2);
                 return;
             }
-            
+
             Data = value.Item1.Flatten();
             OnReload();
         }

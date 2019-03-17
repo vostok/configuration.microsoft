@@ -16,14 +16,14 @@ namespace Vostok.Configuration.Microsoft.Tests
         [TestCase("name:with:colons")]
         public void Should_FlattenValueSettingsNode(string name)
         {
-            var settingsNode = new ValueNode(name, "testValue");           
+            var settingsNode = new ValueNode(name, "testValue");
             var expectedFlatteringResult = new Dictionary<string, string>
             {
                 {name, "testValue"}
             };
 
             var actualFlatteringResult = settingsNode.Flatten();
-            
+
             actualFlatteringResult.Should().BeEquivalentTo(expectedFlatteringResult);
         }
 
@@ -35,14 +35,14 @@ namespace Vostok.Configuration.Microsoft.Tests
         {
             var expectedNames = RandomStringGenerator.CreateStrings(childValuesAmount, 16);
             var expectedValues = RandomStringGenerator.CreateStrings(childValuesAmount, 16);
-            
+
             var childNodes = expectedNames.Zip(expectedValues, (s, s1) => new ValueNode(s, s1)).ToList();
             var settingsNode = new ObjectNode(name, childNodes);
-            
+
             var expectedFlatteringResult = childNodes.ToDictionary(
                 s => $"{name}:{s.Name}".TrimStart(':'),
                 s => s.Value);
-            
+
             var actualFlatteringResult = settingsNode.Flatten();
 
             actualFlatteringResult.Should().BeEquivalentTo(expectedFlatteringResult);
@@ -65,7 +65,7 @@ namespace Vostok.Configuration.Microsoft.Tests
             }
 
             var actualFlatteringResult = settingsNode.Flatten();
-            
+
             actualFlatteringResult.Should().BeEquivalentTo(expectedFlatteringResult);
         }
 
@@ -77,19 +77,19 @@ namespace Vostok.Configuration.Microsoft.Tests
         {
             var childNames = RandomStringGenerator.CreateStrings(childCount, 16);
             var expectedValues = RandomStringGenerator.CreateStrings(childCount, 16);
-            
+
             var childNodes = childNames.Zip(expectedValues, (s, s1) => new ValueNode(s, s1)).ToList();
-            
+
             var nestedNode = new ObjectNode(nestedNodeName, childNodes);
-            var settingsNode = new ObjectNode(rootNodeName, new []{ nestedNode });
+            var settingsNode = new ObjectNode(rootNodeName, new[] {nestedNode});
 
             var expectedFlatteringResult = childNodes.ToDictionary(
                 s => $"{expectedPrefix}:{s.Name}".TrimStart(':'),
                 s => s.Value
             );
-            
+
             var actualFlatteringResult = settingsNode.Flatten();
-            
+
             actualFlatteringResult.Should().BeEquivalentTo(expectedFlatteringResult);
         }
 
@@ -103,8 +103,8 @@ namespace Vostok.Configuration.Microsoft.Tests
 
             var childNodes = expectedValues.Select(s => new ValueNode(s)).ToList();
             var arrayNode = new ArrayNode(nestedNodeName, childNodes);
-            var settingsNode = new ObjectNode(rootNodeName, new []{arrayNode});
-            
+            var settingsNode = new ObjectNode(rootNodeName, new[] {arrayNode});
+
             var expectedFlatteringResult = new Dictionary<string, string>();
             for (var i = 0; i < arrayLength; i++)
             {
@@ -112,7 +112,7 @@ namespace Vostok.Configuration.Microsoft.Tests
             }
 
             var actualFlatteringResult = settingsNode.Flatten();
-            
+
             actualFlatteringResult.Should().BeEquivalentTo(expectedFlatteringResult);
         }
     }

@@ -10,7 +10,7 @@ namespace Vostok.Configuration.Microsoft
         {
             this.vostokConfigurationSource = vostokConfigurationSource;
         }
-        
+
         public IConfigurationProvider Build(IConfigurationBuilder builder) =>
             new VostokConfigurationProvider(vostokConfigurationSource);
     }
