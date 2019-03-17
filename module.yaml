@@ -7,7 +7,7 @@ notests *default:
 
   install:
     - Vostok.Configuration.Microsoft/bin/Release/netstandard2.0/Vostok.Configuration.Microsoft.dll
-    - module vostok.configuration
+    - module vostok.configuration.abstractions
     - nuget Microsoft.Extensions.Configuration/2.2.0
 
   deps:
