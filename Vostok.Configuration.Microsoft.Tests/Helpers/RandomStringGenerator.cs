@@ -8,7 +8,7 @@ namespace Vostok.Configuration.Microsoft.Tests.Helpers
     {
         [ThreadStatic]
         private static Random random;
-        
+
         public static string CreateString(int length)
         {
             var rnd = GetRandom();
@@ -25,7 +25,7 @@ namespace Vostok.Configuration.Microsoft.Tests.Helpers
         public static List<string> CreateStrings(int amount, int length)
         {
             var result = new List<string>();
-            
+
             for (var i = 0; i < amount; i++)
             {
                 result.Add(CreateString(length));
@@ -34,9 +34,7 @@ namespace Vostok.Configuration.Microsoft.Tests.Helpers
             return result;
         }
 
-        private static Random GetRandom()
-        {
-            return random ?? (random = new Random());
-        }
+        private static Random GetRandom() =>
+            random ?? (random = new Random());
     }
 }
