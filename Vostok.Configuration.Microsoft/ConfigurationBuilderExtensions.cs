@@ -6,13 +6,13 @@ using IConfigurationSource = Vostok.Configuration.Abstractions.IConfigurationSou
 namespace Vostok.Configuration.Microsoft
 {
     /// <summary>
-    /// Extension methods for <see cref="IConfigurationBuilder"/>.
+    /// Extension methods for <see cref="IConfigurationBuilder" />.
     /// </summary>
     [PublicAPI]
     public static class ConfigurationBuilderExtensions
     {
         /// <summary>
-        ///     Adds vostok configuration source as provider for <see cref="IConfiguration"/>.
+        ///     Adds vostok configuration source as provider for <see cref="IConfiguration" />.
         /// </summary>
         public static IConfigurationBuilder AddVostok(
             [NotNull] this IConfigurationBuilder configurationBuilder,

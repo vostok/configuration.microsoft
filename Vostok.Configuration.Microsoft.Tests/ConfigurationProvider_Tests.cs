@@ -38,7 +38,7 @@ namespace Vostok.Configuration.Microsoft.Tests
                     });
 
             configurationProvider = new VostokConfigurationProvider(vostokConfigurationSource);
-
+            SetSettings(null);
             configuration = new ConfigurationRoot(new List<IConfigurationProvider> {configurationProvider});
         }
 
@@ -66,7 +66,18 @@ namespace Vostok.Configuration.Microsoft.Tests
         }
 
         [Test]
-        public void Should_IgnoreExceptions()
+        public void Should_FailOnInitializationException()
+        {
+            configurationProvider = new VostokConfigurationProvider(vostokConfigurationSource);
+            SetException(new InvalidOperationException());
+
+            var thrownException = Assert.Throws<AggregateException>(
+                () => new ConfigurationRoot(new List<IConfigurationProvider> {configurationProvider}));
+            thrownException.InnerException.Should().BeOfType<InvalidOperationException>();
+        }
+
+        [Test]
+        public void Should_IgnoreOtherExceptions()
         {
             Assert.DoesNotThrow(() => SetException(new Exception()));
         }
