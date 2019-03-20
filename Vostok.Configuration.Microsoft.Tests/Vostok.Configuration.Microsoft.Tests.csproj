@@ -18,7 +18,7 @@
     <ProjectReference Include="..\Vostok.Configuration.Microsoft\Vostok.Configuration.Microsoft.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Vostok.Configuration.Abstractions, Version=0.1.6.0, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Vostok.Configuration.Abstractions">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\vostok.configuration.abstractions\Vostok.Configuration.Abstractions\bin\Release\netstandard2.0\Vostok.Configuration.Abstractions.dll</HintPath>
     </Reference>
