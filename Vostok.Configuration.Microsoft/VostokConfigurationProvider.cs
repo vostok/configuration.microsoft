@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
-using Vostok.Configuration.Abstractions;
 using Vostok.Configuration.Abstractions.SettingsTree;
 using IConfigurationSource = Vostok.Configuration.Abstractions.IConfigurationSource;
 
@@ -24,7 +23,7 @@ namespace Vostok.Configuration.Microsoft
             if (vostokConfigurationSource == null)
                 throw new ArgumentNullException(nameof(vostokConfigurationSource));
 
-            vostokConfigurationSource.Observe().Subscribe(this);
+            new HealingConfigurationSource(vostokConfigurationSource).Observe().Subscribe(this);
         }
 
         /// <inheritdoc />

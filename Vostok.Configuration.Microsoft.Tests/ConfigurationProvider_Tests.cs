@@ -45,7 +45,7 @@ namespace Vostok.Configuration.Microsoft.Tests
         [Test]
         public void Should_SubscribeToChangesOnCreation()
         {
-            subscriptionObservable.Received(1).Subscribe(configurationProvider);
+            subscriptionObservable.Received(1).Subscribe(Arg.Any<HealingObservable>());
         }
 
         [Test]
