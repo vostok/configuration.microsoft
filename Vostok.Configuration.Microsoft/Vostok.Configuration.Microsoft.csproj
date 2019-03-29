@@ -17,7 +17,7 @@
   <PropertyGroup>
     <PackageProjectUrl>https://github.com/vostok/configuration.microsoft</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/vostok/configuration.microsoft/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageTags>vostok vostok.configuration configuration</PackageTags>
+    <PackageTags>vostok vostok.configuration</PackageTags>
     <RepositoryUrl>https://github.com/vostok/configuration.microsoft</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
