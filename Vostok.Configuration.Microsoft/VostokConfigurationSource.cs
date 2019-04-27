@@ -5,13 +5,11 @@ using Microsoft.Extensions.Configuration;
 namespace Vostok.Configuration.Microsoft
 {
     /// <inheritdoc />
+    [PublicAPI]
     public class VostokConfigurationSource : IConfigurationSource
     {
         private readonly Abstractions.IConfigurationSource vostokConfigurationSource;
 
-        /// <summary>
-        ///     Creates new configuration source for <see cref="Configuration" /> using vostok <see cref="IConfigurationSource" />.
-        /// </summary>
         public VostokConfigurationSource([NotNull] Abstractions.IConfigurationSource vostokConfigurationSource)
         {
             this.vostokConfigurationSource =

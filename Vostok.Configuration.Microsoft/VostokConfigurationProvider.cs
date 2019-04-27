@@ -7,17 +7,12 @@ using IConfigurationSource = Vostok.Configuration.Abstractions.IConfigurationSou
 
 namespace Vostok.Configuration.Microsoft
 {
-    /// <inheritdoc cref="ConfigurationProvider" />
+    /// <inheritdoc cref="IConfigurationProvider" />
+    [PublicAPI]
     public class VostokConfigurationProvider : ConfigurationProvider, IObserver<ValueTuple<ISettingsNode, Exception>>
     {
         private readonly TaskCompletionSource<byte> configurationInitialized = new TaskCompletionSource<byte>();
 
-        /// <summary>
-        ///     Creates new configuration provider for <see cref="Configuration" /> using vostok
-        /// <see
-        ///     cref="Abstractions.IConfigurationSource" />
-        /// .
-        /// </summary>
         public VostokConfigurationProvider([NotNull] IConfigurationSource vostokConfigurationSource)
         {
             if (vostokConfigurationSource == null)
