@@ -9,22 +9,22 @@ namespace Vostok.Configuration.Microsoft
         IObserver<(ISettingsNode settings, Exception error)>,
         IDisposable
     {
-        private readonly IConfigurationSource configurationSource;
-        private IObserver<(ISettingsNode settings, Exception error)> configurationObserver;
-        private IDisposable activeObservableSubscription;
+        private readonly IConfigurationSource source;
+        private volatile IDisposable sourceSubscription;
+        private volatile IObserver<(ISettingsNode settings, Exception error)> externalObserver;
 
-        public HealingObservable(IConfigurationSource configurationSource)
-            => this.configurationSource = configurationSource;
+        public HealingObservable(IConfigurationSource source)
+            => this.source = source;
 
         public IDisposable Subscribe(IObserver<(ISettingsNode settings, Exception error)> observer)
         {
-            configurationObserver = observer;
+            externalObserver = observer;
             EnsureSubscribedToInnerSource();
             return this;
         }
 
         public void OnCompleted()
-            => configurationObserver.OnCompleted();
+            => externalObserver.OnCompleted();
 
         public void OnError(Exception error)
         {
@@ -33,28 +33,24 @@ namespace Vostok.Configuration.Microsoft
         }
 
         public void OnNext((ISettingsNode settings, Exception error) value)
-        {
-            configurationObserver.OnNext(value);
-        }
+            => externalObserver.OnNext(value);
 
         public void Dispose()
-        {
-            activeObservableSubscription?.Dispose();
-        }
+            => sourceSubscription?.Dispose();
 
         private void EnsureSubscribedToInnerSource()
         {
-            if (activeObservableSubscription == null)
-                activeObservableSubscription = configurationSource.Observe().Subscribe(this);
+            if (sourceSubscription == null)
+                sourceSubscription = source.Observe().Subscribe(this);
         }
 
         private void ResubscribeAfterDelay()
         {
-            if (activeObservableSubscription == null)
+            if (sourceSubscription == null)
                 return;
 
-            activeObservableSubscription.Dispose();
-            activeObservableSubscription = null;
+            sourceSubscription.Dispose();
+            sourceSubscription = null;
 
             Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith(_ => EnsureSubscribedToInnerSource());
         }
