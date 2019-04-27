@@ -14,9 +14,7 @@ namespace Vostok.Configuration.Microsoft
         private IDisposable activeObservableSubscription;
 
         public HealingObservable(IConfigurationSource configurationSource)
-        {
-            this.configurationSource = configurationSource;
-        }
+            => this.configurationSource = configurationSource;
 
         public IDisposable Subscribe(IObserver<(ISettingsNode settings, Exception error)> observer)
         {
@@ -26,9 +24,7 @@ namespace Vostok.Configuration.Microsoft
         }
 
         public void OnCompleted()
-        {
-            configurationObserver.OnCompleted();
-        }
+            => configurationObserver.OnCompleted();
 
         public void OnError(Exception error)
         {
