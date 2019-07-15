@@ -11,7 +11,7 @@ namespace Vostok.Configuration.Microsoft
     [PublicAPI]
     public class VostokConfigurationProvider : ConfigurationProvider, IObserver<ValueTuple<ISettingsNode, Exception>>
     {
-        private readonly TaskCompletionSource<byte> configurationInitialized = new TaskCompletionSource<byte>();
+        private readonly TaskCompletionSource<byte> configurationInitialized = new TaskCompletionSource<byte>(TaskCreationOptions.RunContinuationsAsynchronously);
 
         public VostokConfigurationProvider([NotNull] IConfigurationSource vostokConfigurationSource)
         {
@@ -24,7 +24,7 @@ namespace Vostok.Configuration.Microsoft
         /// <inheritdoc />
         public override void Load()
         {
-            var _ = configurationInitialized.Task.Result;
+            configurationInitialized.Task.GetAwaiter().GetResult();
         }
 
         /// <inheritdoc />
