@@ -12,7 +12,9 @@ namespace Vostok.Configuration.Microsoft
             var context = new List<string>();
             IDictionary<string, string> result = new SortedDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-            VisitNode(settingsNode, context, result);
+            if (settingsNode != null)
+                VisitNodeInternal(settingsNode, context, result);
+
             return result;
         }
 
