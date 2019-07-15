@@ -16,7 +16,7 @@ namespace Vostok.Configuration.Microsoft.Tests
         [TestCase("name:with:colons")]
         public void Should_FlattenValueSettingsNode(string name)
         {
-            var settingsNode = new ValueNode(name, "testValue");
+            var settingsNode = new ObjectNode("root", new [] { new ValueNode(name, "testValue") });
             var expectedFlatteringResult = new Dictionary<string, string>
             {
                 {name, "testValue"}
@@ -37,7 +37,7 @@ namespace Vostok.Configuration.Microsoft.Tests
             var expectedValues = RandomStringGenerator.CreateStrings(childValuesAmount, 16);
 
             var childNodes = expectedNames.Zip(expectedValues, (s, s1) => new ValueNode(s, s1)).ToList();
-            var settingsNode = new ObjectNode(name, childNodes);
+            var settingsNode = new ObjectNode("root", new [] {new ObjectNode(name, childNodes) });
 
             var expectedFlatteringResult = childNodes.ToDictionary(
                 s => $"{name}:{s.Name}".TrimStart(':'),
@@ -61,7 +61,7 @@ namespace Vostok.Configuration.Microsoft.Tests
             var expectedFlatteringResult = new Dictionary<string, string>();
             for (var i = 0; i < arrayLength; i++)
             {
-                expectedFlatteringResult[$"testArray:{i}"] = expectedValues[i];
+                expectedFlatteringResult[$"{i}"] = expectedValues[i];
             }
 
             var actualFlatteringResult = settingsNode.Flatten();
@@ -69,9 +69,9 @@ namespace Vostok.Configuration.Microsoft.Tests
             actualFlatteringResult.Should().BeEquivalentTo(expectedFlatteringResult);
         }
 
-        [TestCase("root", "nested", "root:nested", 10)]
+        [TestCase("root", "nested", "nested", 10)]
         [TestCase("", "nested", "nested", 10)]
-        [TestCase("root", "", "root", 100)]
+        [TestCase("root", "", "", 100)]
         [TestCase("", "", "", 100)]
         public void Should_FlattenNestedObjectSettingsNode(string rootNodeName, string nestedNodeName, string expectedPrefix, int childCount)
         {
@@ -93,9 +93,9 @@ namespace Vostok.Configuration.Microsoft.Tests
             actualFlatteringResult.Should().BeEquivalentTo(expectedFlatteringResult);
         }
 
-        [TestCase("root", "nested", "root:nested", 10)]
+        [TestCase("root", "nested", "nested", 10)]
         [TestCase("", "nested", "nested", 10)]
-        [TestCase("root", "", "root", 100)]
+        [TestCase("root", "", "", 100)]
         [TestCase("", "", "", 100)]
         public void Should_FlattenNestedArraySettingsNode(string rootNodeName, string nestedNodeName, string expectedPrefix, int arrayLength)
         {

@@ -84,6 +84,8 @@ namespace Vostok.Configuration.Microsoft.Tests
 
         private void SetSettings(ISettingsNode settingsNode)
         {
+            if (settingsNode != null)
+                settingsNode = new ObjectNode("root", new[] {settingsNode});
             updateSettingsDelegate((settingsNode, null));
         }
 
