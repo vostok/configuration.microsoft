@@ -9,7 +9,7 @@ namespace Vostok.Configuration.Microsoft
     {
         public static IDictionary<string, string> Flatten(this ISettingsNode settingsNode)
         {
-            var context = new Stack<string>();
+            var context = new List<string>();
             IDictionary<string, string> result = new SortedDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
             VisitNode(settingsNode, context, result);
@@ -18,20 +18,20 @@ namespace Vostok.Configuration.Microsoft
 
         private static void VisitNode(
             ISettingsNode settingsNode,
-            Stack<string> context,
+            List<string> context,
             IDictionary<string, string> result)
         {
             if (settingsNode == null)
                 return;
 
-            context.Push(settingsNode.Name);
+            context.Add(settingsNode.Name);
             VisitNodeInternal(settingsNode, context, result);
-            context.Pop();
+            context.RemoveAt(context.Count - 1);
         }
 
         private static void VisitNodeInternal(
             ISettingsNode settingsNode,
-            Stack<string> context,
+            List<string> context,
             IDictionary<string, string> result)
         {
             switch (settingsNode)
@@ -52,7 +52,7 @@ namespace Vostok.Configuration.Microsoft
 
         private static void VisitObject(
             IEnumerable<ISettingsNode> nodes,
-            Stack<string> context,
+            List<string> context,
             IDictionary<string, string> result)
         {
             foreach (var node in nodes)
@@ -63,22 +63,22 @@ namespace Vostok.Configuration.Microsoft
 
         private static void VisitArray(
             IEnumerable<ISettingsNode> nodes,
-            Stack<string> context,
+            List<string> context,
             IDictionary<string, string> result)
         {
             var idx = 0;
             foreach (var node in nodes)
             {
-                context.Push(idx.ToString());
+                context.Add(idx.ToString());
                 VisitNode(node, context, result);
-                context.Pop();
+                context.RemoveAt(context.Count - 1);
                 idx++;
             }
         }
 
-        private static string AssemblePath(Stack<string> parts)
+        private static string AssemblePath(List<string> parts)
         {
-            return string.Join(":", parts.Reverse().Where(s => !string.IsNullOrEmpty(s)));
+            return string.Join(":", parts.Where(s => !string.IsNullOrEmpty(s)));
         }
     }
 }
