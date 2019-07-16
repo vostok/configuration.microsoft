@@ -71,9 +71,8 @@ namespace Vostok.Configuration.Microsoft.Tests
             configurationProvider = new VostokConfigurationProvider(vostokConfigurationSource);
             SetException(new InvalidOperationException());
 
-            var thrownException = Assert.Throws<AggregateException>(
-                () => new ConfigurationRoot(new List<IConfigurationProvider> {configurationProvider}));
-            thrownException.InnerException.Should().BeOfType<InvalidOperationException>();
+            // ReSharper disable once ObjectCreationAsStatement
+            Assert.Throws<InvalidOperationException>(() => new ConfigurationRoot(new List<IConfigurationProvider> {configurationProvider}));
         }
 
         [Test]
@@ -84,6 +83,8 @@ namespace Vostok.Configuration.Microsoft.Tests
 
         private void SetSettings(ISettingsNode settingsNode)
         {
+            if (settingsNode != null)
+                settingsNode = new ObjectNode("root", new[] {settingsNode});
             updateSettingsDelegate((settingsNode, null));
         }
 
