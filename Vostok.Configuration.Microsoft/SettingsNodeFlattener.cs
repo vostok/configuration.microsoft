@@ -71,9 +71,15 @@ namespace Vostok.Configuration.Microsoft
             var idx = 0;
             foreach (var node in nodes)
             {
-                context.Add(idx.ToString());
+                var appendIndex = node.Name == null;
+                if (appendIndex)
+                    context.Add(idx.ToString());
+
                 VisitNode(node, context, result);
-                context.RemoveAt(context.Count - 1);
+
+                if (appendIndex)
+                    context.RemoveAt(context.Count - 1);
+
                 idx++;
             }
         }
