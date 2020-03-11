@@ -1,3 +1,7 @@
+## 1.0.2 (11-03-2020):
+
+Downgraded version of Microsoft.Extensions.Configuration dependency to 2.1.1
+
 ## 1.0.1 (25-09-2019):
 
 Fixed duplicated index of array items.
