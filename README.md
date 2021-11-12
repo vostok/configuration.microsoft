@@ -1,6 +1,6 @@
 # Vostok.Configuration.Microsoft
 
-[![Build status](https://ci.appveyor.com/api/projects/status/github/vostok/configuration.microsoft?svg=true&branch=master)](https://ci.appveyor.com/project/vostok/configuration.microsoft/branch/master)
+[![Build & Test & Publish](https://github.com/vostok/configuration.microsoft/actions/workflows/ci.yml/badge.svg)](https://github.com/vostok/configuration.microsoft/actions/workflows/ci.yml)
 [![NuGet](https://img.shields.io/nuget/v/Vostok.Configuration.Microsoft.svg)](https://www.nuget.org/packages/Vostok.Configuration.Microsoft)
 
 This module integrates vostok configuration library with Microsoft.Extensions.Configuration
