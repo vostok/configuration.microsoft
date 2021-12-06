@@ -1,3 +1,7 @@
+## 1.0.3 (06-12-2021):
+
+Added `net6.0` target.
+
 ## 1.0.2 (11-03-2020):
 
 Downgraded version of Microsoft.Extensions.Configuration dependency to 2.1.1
