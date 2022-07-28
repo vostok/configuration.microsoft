@@ -1,0 +1,11 @@
+override Vostok.Configuration.Microsoft.VostokConfigurationProvider.Load() -> void
+static Vostok.Configuration.Microsoft.ConfigurationBuilderExtensions.AddVostok(this Microsoft.Extensions.Configuration.IConfigurationBuilder configurationBuilder, Vostok.Configuration.Abstractions.IConfigurationSource vostokSource) -> Microsoft.Extensions.Configuration.IConfigurationBuilder
+Vostok.Configuration.Microsoft.ConfigurationBuilderExtensions
+Vostok.Configuration.Microsoft.VostokConfigurationProvider
+Vostok.Configuration.Microsoft.VostokConfigurationProvider.OnCompleted() -> void
+Vostok.Configuration.Microsoft.VostokConfigurationProvider.OnError(System.Exception error) -> void
+Vostok.Configuration.Microsoft.VostokConfigurationProvider.OnNext((Vostok.Configuration.Abstractions.SettingsTree.ISettingsNode, System.Exception) value) -> void
+Vostok.Configuration.Microsoft.VostokConfigurationProvider.VostokConfigurationProvider(Vostok.Configuration.Abstractions.IConfigurationSource vostokConfigurationSource) -> void
+Vostok.Configuration.Microsoft.VostokConfigurationSource
+Vostok.Configuration.Microsoft.VostokConfigurationSource.Build(Microsoft.Extensions.Configuration.IConfigurationBuilder builder) -> Microsoft.Extensions.Configuration.IConfigurationProvider
+Vostok.Configuration.Microsoft.VostokConfigurationSource.VostokConfigurationSource(Vostok.Configuration.Abstractions.IConfigurationSource vostokConfigurationSource) -> void
