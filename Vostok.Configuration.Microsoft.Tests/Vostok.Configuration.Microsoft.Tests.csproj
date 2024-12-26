@@ -17,10 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Vostok.Configuration.Abstractions">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\vostok.configuration.abstractions\Vostok.Configuration.Abstractions\bin\Release\$(ReferencesFramework)\Vostok.Configuration.Abstractions.dll</HintPath>
-    </Reference>
+    <ModuleReference Include="vostok.configuration.abstractions" />
   </ItemGroup>
   
 </Project>
