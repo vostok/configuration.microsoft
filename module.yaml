@@ -9,6 +9,22 @@ notests *default:
     - Vostok.Configuration.Microsoft/bin/Release/netstandard2.0/Vostok.Configuration.Microsoft.dll
     - module vostok.configuration.abstractions
     - nuget Microsoft.Extensions.Configuration/2.1.1
+    - groups:
+        - target-framework: "netstandard2.0"
+          libraries:
+            - Vostok.Configuration.Microsoft/bin/Release/netstandard2.0/Vostok.Configuration.Microsoft.dll
+          modules:
+            - name: vostok.configuration.abstractions
+        - target-framework: "net6.0"
+          libraries:
+            - Vostok.Configuration.Microsoft/bin/Release/net6.0/Vostok.Configuration.Microsoft.dll
+          modules:
+            - name: vostok.configuration.abstractions
+        - target-framework: "net8.0"
+          libraries:
+            - Vostok.Configuration.Microsoft/bin/Release/net8.0/Vostok.Configuration.Microsoft.dll
+          modules:
+            - name: vostok.configuration.abstractions
 
   deps:
     - vostok.configuration.abstractions
@@ -19,6 +35,29 @@ full-build > notests:
     - -vostok.devtools
     - vostok.devtools@with-net6.0
 
+  install:
+    - Vostok.Configuration.Microsoft/bin/Release/netstandard2.0/Vostok.Configuration.Microsoft.dll
+    - module vostok.configuration.abstractions
+    - nuget Microsoft.Extensions.Configuration/2.1.1
+    - groups:
+        - target-framework: "netstandard2.0"
+          libraries:
+            - Vostok.Configuration.Microsoft/bin/Release/netstandard2.0/Vostok.Configuration.Microsoft.dll
+          modules:
+            - name: vostok.configuration.abstractions
+        - target-framework: "net6.0"
+          libraries:
+            - Vostok.Configuration.Microsoft/bin/Release/net6.0/Vostok.Configuration.Microsoft.dll
+          modules:
+            - name: vostok.configuration.abstractions
+        - target-framework: "net8.0"
+          libraries:
+            - Vostok.Configuration.Microsoft/bin/Release/net8.0/Vostok.Configuration.Microsoft.dll
+          modules:
+            - name: vostok.configuration.abstractions
+
   build:
     target: Vostok.Configuration.Microsoft.sln
     configuration: Release
+    tool:
+      name: dotnet
